@@ -36,7 +36,7 @@ public class BinaryArchive : IDisposable, IAsyncDisposable
 
         byte[] fileType = reader.ReadBytes(16);
         if (Encoding.UTF8.GetString(fileType) != "binary.archive00")
-            throw new Exception($"{FileStream.Name} file is not a binary.archive00 file");
+            throw new BinaryArchiveException($"{FileStream.Name} file is not a binary.archive00 file");
 
         FileStream.Seek(4, SeekOrigin.Current); // Always zeroes
         IsPatch = reader.ReadBoolean();
@@ -48,7 +48,7 @@ public class BinaryArchive : IDisposable, IAsyncDisposable
         MusicCa = reader.ReadByte() == 192; // 192 = music.ca | 193 = other
         bool end = reader.ReadBoolean();
         if (end is false)
-            throw new Exception("Not end of archive file!");
+            throw new BinaryArchiveException("Not end of archive file");
     }
 
     private void ReadEntries(BinaryReader reader)
@@ -69,7 +69,7 @@ public class BinaryArchive : IDisposable, IAsyncDisposable
             bool musicCa = reader.ReadByte() == 192; // 192 = music.ca | 193 = other
             bool end = reader.ReadBoolean();
             if (end is false)
-                throw new Exception("Not end of archive entry file!");
+                throw new BinaryArchiveException("Not end of archive entry file");
 
             FileStream.Seek(8, SeekOrigin.Current); // Entry separator
 
