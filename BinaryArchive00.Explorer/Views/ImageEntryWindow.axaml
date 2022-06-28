@@ -1,0 +1,24 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:BinaryArchive00.Explorer.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
+        MinWidth="128" MinHeight="128"
+        Width="{Binding Image.Width, FallbackValue=0}"
+        Height="{Binding Image.Height, FallbackValue=0}"
+        x:Class="BinaryArchive00.Explorer.Views.ImageEntryWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="{Binding Entry.FileName, FallbackValue=None}">
+
+    <Design.DataContext>
+        <vm:ImageEntryWindowViewModel />
+    </Design.DataContext>
+
+    <StackPanel VerticalAlignment="Center">
+        <Image Width="{Binding Image.Width, FallbackValue=0}"
+               Height="{Binding Image.Height, FallbackValue=0}"
+               Source="{Binding Bitmap}" />
+    </StackPanel>
+
+</Window>

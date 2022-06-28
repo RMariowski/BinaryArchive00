@@ -1,0 +1,59 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:BinaryArchive00.Explorer.ViewModels"
+        xmlns:converters="clr-namespace:BinaryArchive00.Explorer.Converters"
+        mc:Ignorable="d" d:DesignWidth="1024" d:DesignHeight="720"
+        Width="1024" Height="720"
+        x:Name="Window"
+        x:Class="BinaryArchive00.Explorer.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="BinaryArchive00.Explorer">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+
+    <Window.Resources>
+        <converters:NullVisibilityConverter x:Key="NullToVisibilityConverter" />
+    </Window.Resources>
+
+    <StackPanel VerticalAlignment="Center" Spacing="5" MaxWidth="500">
+        <Button Width="200"
+                Command="{Binding OpenFile, Mode=OneWay}"
+                CommandParameter="{Binding ElementName=Window}"
+                HorizontalAlignment="Center" HorizontalContentAlignment="Center">
+            Open Archive File
+        </Button>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock Text="Selected file: " HorizontalAlignment="Center" />
+            <TextBlock Text="{Binding BinaryArchive.FileName, FallbackValue=None}"
+                       HorizontalAlignment="Center" />
+        </StackPanel>
+        <StackPanel IsVisible="{Binding BinaryArchive, Converter={StaticResource NullToVisibilityConverter}}"
+                    Spacing="7">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="Filter by name: " HorizontalAlignment="Center" />
+                <TextBox Text="{Binding NameFilter}" MinWidth="150" />
+            </StackPanel>
+            <Grid>
+                <DataGrid Items="{Binding Entries}" SelectionMode="Single"
+                          SelectedItem="{Binding SelectedEntry}" AutoGenerateColumns="False"
+                          IsReadOnly="True" MaxHeight="300">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding FileName}" />
+                        <DataGridTextColumn Header="Type" Binding="{Binding Type}" />
+                        <DataGridTextColumn Header="Size" Binding="{Binding Size}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+            <Button IsVisible="{Binding SelectedEntry, Converter={StaticResource NullToVisibilityConverter}}"
+                    Width="200" HorizontalAlignment="Center" HorizontalContentAlignment="Center"
+                    Command="{Binding ShowEntryContent, Mode=OneWay}">
+                Show Entry Content
+            </Button>
+        </StackPanel>
+    </StackPanel>
+
+</Window>

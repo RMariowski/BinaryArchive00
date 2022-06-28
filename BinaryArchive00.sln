@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinaryArchive00", "BinaryAr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinaryArchive00.Utils", "BinaryArchive00.Utils\BinaryArchive00.Utils.csproj", "{D4202800-4252-4B47-A73A-947B38C51A30}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinaryArchive00.Explorer", "BinaryArchive00.Explorer\BinaryArchive00.Explorer.csproj", "{E13F6F83-326B-47D8-922B-070A977B3D93}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{D4202800-4252-4B47-A73A-947B38C51A30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4202800-4252-4B47-A73A-947B38C51A30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4202800-4252-4B47-A73A-947B38C51A30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E13F6F83-326B-47D8-922B-070A977B3D93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E13F6F83-326B-47D8-922B-070A977B3D93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E13F6F83-326B-47D8-922B-070A977B3D93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E13F6F83-326B-47D8-922B-070A977B3D93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
