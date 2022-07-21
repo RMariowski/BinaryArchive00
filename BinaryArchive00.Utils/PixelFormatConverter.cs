@@ -4,7 +4,8 @@ public static class PixelFormatConverter
 {
     public static byte[] FromRgba16ToRgba32(ushort[] rgba16)
     {
-        ArgumentNullException.ThrowIfNull(rgba16);
+        if (rgba16 is null)
+            throw new ArgumentNullException(nameof(rgba16));
 
         var rgba32 = new byte[rgba16.Length * 4];
         for (int i32 = 0, i16 = 0; i16 < rgba16.Length; i32 += 4, i16++)
@@ -22,7 +23,8 @@ public static class PixelFormatConverter
 
     public static byte[] FromRgba16ToRgba32(byte[] rgba16)
     {
-        ArgumentNullException.ThrowIfNull(rgba16);
+        if (rgba16 is null)
+            throw new ArgumentNullException(nameof(rgba16));
 
         var rgba32 = new byte[rgba16.Length * 2];
         for (int p = 0, p2 = 0; p2 < rgba16.Length; p += 4, p2 += 2)
