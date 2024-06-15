@@ -21,6 +21,8 @@ public sealed class AllCaTests
             reader.ReadBytes(3).Should().AllSatisfy(b => Assert.Equal(0, b));
             stream.Seek(4, SeekOrigin.Current);
             reader.ReadBytes(4).Should().AllSatisfy(b => Assert.Equal(0, b));
+            stream.Seek(16, SeekOrigin.Current);
+            reader.ReadBytes(8).Should().AllSatisfy(b => Assert.Equal(0, b));
 
             stream.Seek(archive.EntriesOffset, SeekOrigin.Begin);
             while (stream.Position < stream.Length)

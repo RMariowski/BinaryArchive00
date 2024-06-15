@@ -9,6 +9,7 @@ public sealed class GiantglenCaTests
     public void Test()
     {
         Sut.IsPatch.Should().BeFalse();
+        Sut.UnknownEnum.Should().Be(UnknownEnum.Other);
         Sut.Entries.Should().HaveCount(9);
     }
 

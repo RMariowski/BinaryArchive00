@@ -18,9 +18,8 @@ public partial class ArchiveFile : IDisposable
     public bool IsPatch { get; private set; }
     public int EntriesOffset { get; private set; }
     public byte[] Unknown { get; private set; } = [];
-    public short Unknown2 { get; private set; }
-    public int Unknown3 { get; private set; }
-    public byte Unknown4 { get; private set; }
+    public byte[] Unknown2 { get; private set; } = [];
+    public UnknownEnum UnknownEnum { get; private set; }
 
     public IReadOnlyList<ArchiveEntry> Entries => _entries;
 

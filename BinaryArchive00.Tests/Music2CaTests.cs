@@ -9,6 +9,7 @@ public sealed class Music2CaTests
     public void Test()
     {
         Sut.IsPatch.Should().BeFalse();
+        Sut.UnknownEnum.Should().Be(UnknownEnum.Other);
         Sut.Entries.Should().HaveCount(3);
     }
 

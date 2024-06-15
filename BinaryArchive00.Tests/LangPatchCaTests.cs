@@ -9,6 +9,7 @@ public sealed class LangPatchCaTests
     public void Test()
     {
         Sut.IsPatch.Should().BeTrue();
+        Sut.UnknownEnum.Should().Be(UnknownEnum.Other);
         Sut.Entries.Should().HaveCount(16);
     }
 

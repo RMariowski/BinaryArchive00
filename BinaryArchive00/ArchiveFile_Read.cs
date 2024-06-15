@@ -24,12 +24,15 @@ public partial class ArchiveFile
         stream.Seek(3, SeekOrigin.Current); // Always zeroes
         EntriesOffset = reader.ReadInt32();
         stream.Seek(4, SeekOrigin.Current); // Always zeroes
-        stream.Seek(14, SeekOrigin.Current); // Copyright notice (visible for maps)
-        Unknown = reader.ReadBytes(2); // TODO: Bytes to check, only custom maps
+        stream.Seek(16, SeekOrigin.Current); // Copyright notice (visible for maps)
         stream.Seek(8, SeekOrigin.Current); // Always zeroes
-        Unknown2 = reader.ReadInt16(); // TODO: Bytes to check
-        Unknown3 = reader.ReadInt32(); // TODO: Bytes to check
-        Unknown4 = reader.ReadByte(); // TODO: Bytes to check
+        Unknown = reader.ReadBytes(2); // TODO: Bytes to check
+        Unknown2 = reader.ReadBytes(4); // TODO: Bytes to check
+
+        var unknownEnum = reader.ReadByte(); // TODO: Bytes to check
+        UnknownEnum = Enum.IsDefined(typeof(UnknownEnum), unknownEnum)
+            ? (UnknownEnum)unknownEnum
+            : throw new ArchiveEntryException("Value outside of UnknownEnum range");
 
         if (reader.ReadBoolean() is false)
             throw new NotEndOfArchiveHeaderException();
