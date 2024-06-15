@@ -1,0 +1,60 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:BinaryArchive00.App.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:convs="clr-namespace:BinaryArchive00.App.Converters"
+        mc:Ignorable="d" d:DesignWidth="1024" d:DesignHeight="768"
+        Width="1024" Height="768"
+        x:Class="BinaryArchive00.App.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="BinaryArchive00.App">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+
+    <Window.Resources>
+        <convs:NullVisibilityConverter x:Key="NullToVisibilityConverter" />
+    </Window.Resources>
+
+    <DockPanel>
+        <StackPanel Orientation="Horizontal" Margin="5" Spacing="5" DockPanel.Dock="Top">
+            <Button Command="{Binding OpenFileCommand}"
+                    Width="200" HorizontalAlignment="Left" HorizontalContentAlignment="Center">
+                Open Archive File
+            </Button>
+            <StackPanel IsVisible="{Binding Entries.Count}" Orientation="Horizontal">
+                <TextBlock Text="Filter by name: " HorizontalAlignment="Center" />
+                <TextBox Text="{Binding FilterName}" MinWidth="150" />
+            </StackPanel>
+        </StackPanel>
+        <DataGrid IsVisible="{Binding Archive, Converter={StaticResource NullToVisibilityConverter}}"
+                  ItemsSource="{Binding Entries}"
+                  SelectedItem="{Binding SelectedEntry}"
+                  SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" CanUserReorderColumns="True"
+                  CanUserResizeColumns="True" DockPanel.Dock="Left">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}" />
+                <DataGridTextColumn Header="Size" Binding="{Binding Size}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel IsVisible="{Binding SelectedEntry, Converter={StaticResource NullToVisibilityConverter}}"
+                    DockPanel.Dock="Right">
+            <Image IsVisible="{Binding Bitmap, Converter={StaticResource NullToVisibilityConverter}}"
+                   Width="{Binding Bitmap.Size.Width, FallbackValue=0}"
+                   Height="{Binding Bitmap.Size.Height, FallbackValue=0}"
+                   Source="{Binding Bitmap}" />
+            <TextBox IsVisible="{Binding Text, Converter={StaticResource NullToVisibilityConverter}}"
+                     Text="{Binding Text}" IsReadOnly="True"
+                     AcceptsReturn="True" TextWrapping="Wrap" />
+            <StackPanel IsVisible="{Binding WaveStream, Converter={StaticResource NullToVisibilityConverter}}"
+                        Orientation="Horizontal" VerticalAlignment="Bottom" Spacing="20">
+                <Button Command="{Binding PlayAudioCommand}" Margin="20">Play</Button>
+                <Button Command="{Binding StopAudioCommand}" Margin="20">Stop</Button>
+            </StackPanel>
+        </StackPanel>
+    </DockPanel>
+</Window>
