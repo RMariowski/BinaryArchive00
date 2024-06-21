@@ -23,14 +23,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Update="TestFiles\**\*.ca">
+        <None Update="CustomArchives\**\*.ca">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-        <None Update="TestFiles\*.dat">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-        <None Update="TestFiles\dv2logo.imag">
-          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
     </ItemGroup>
 
