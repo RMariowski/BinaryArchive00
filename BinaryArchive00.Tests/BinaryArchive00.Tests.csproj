@@ -23,12 +23,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Update="CustomArchives\**\*.ca">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\BinaryArchive00\BinaryArchive00.csproj" />
     </ItemGroup>
 

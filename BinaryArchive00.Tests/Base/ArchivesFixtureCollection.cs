@@ -1,4 +1,4 @@
-﻿namespace BinaryArchive00.Tests;
+﻿namespace BinaryArchive00.Tests.Base;
 
 [CollectionDefinition(nameof(ArchivesFixture))]
 public class ArchivesFixtureCollection : ICollectionFixture<ArchivesFixture>

@@ -1,4 +1,4 @@
-﻿namespace BinaryArchive00.Tests;
+﻿namespace BinaryArchive00.Tests.Base;
 
 public class ArchivesFixture : IDisposable
 {
@@ -14,15 +14,7 @@ public class ArchivesFixture : IDisposable
 
     public ArchivesFixture()
     {
-        var caPaths = Directory.GetFiles(Config.PathToArchives, "*.ca", SearchOption.AllDirectories).ToList();
-        var customCaPaths = Directory.GetFiles("CustomArchives", "*.ca", SearchOption.AllDirectories);
-        foreach (var customCaPath in customCaPaths)
-        {
-            var caPath = caPaths.FirstOrDefault(caPath => Path.GetFileName(caPath) == Path.GetFileName(customCaPath));
-            if (caPath is null)
-                caPaths.Add(customCaPath);
-        }
-
+        var caPaths = Directory.GetFiles(Config.PathToArchives, "*.ca", SearchOption.AllDirectories);
         Archives = caPaths.Select(caPath => ArchiveFile.Open(caPath, readEntriesContent: false)).ToArray();
 
         Dv2Ca = Archives.Single(archive => archive.FileName == "dv2.ca");

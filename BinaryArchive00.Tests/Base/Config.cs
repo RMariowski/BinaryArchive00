@@ -1,4 +1,4 @@
-﻿namespace BinaryArchive00.Tests;
+﻿namespace BinaryArchive00.Tests.Base;
 
 public static class Config
 {
