@@ -8,7 +8,7 @@ public sealed class Archives
     {
         var data = _fixture.Archives.Select(archive => new object[]
             { archive.FileName, BitConverter.ToString(archive.Unknown) });
-        Helpers.SaveTable("Extracted/ca-list-u.txt", ["Name", "Unknown"], data.ToArray());
+        SaveTable("Extracted/ca-list-u.txt", ["Name", "Unknown"], data.ToArray());
     }
 
     [Fact]
@@ -16,7 +16,7 @@ public sealed class Archives
     {
         var data = _fixture.Archives.Select(archive => new object[]
             { archive.FileName, BitConverter.ToString(archive.Unknown2) });
-        Helpers.SaveTable("Extracted/ca-list-u2.txt", ["Name", "Unknown2"], data.ToArray());
+        SaveTable("Extracted/ca-list-u2.txt", ["Name", "Unknown2"], data.ToArray());
     }
 
     [Fact]
@@ -24,7 +24,7 @@ public sealed class Archives
     {
         var data = _fixture.Archives.Select(archive => new object[]
             { archive.FileName, BitConverter.ToString([(byte)archive.UnknownEnum]) });
-        Helpers.SaveTable("Extracted/ca-list-ue.txt", ["Name", "Unknown-Enum"], data.ToArray());
+        SaveTable("Extracted/ca-list-ue.txt", ["Name", "Unknown-Enum"], data.ToArray());
     }
 
     private readonly ArchivesFixture _fixture;
