@@ -59,9 +59,8 @@ public partial class ArchiveFile
         var size = reader.ReadInt32();
         var offset = reader.ReadInt32();
         stream.Seek(20, SeekOrigin.Current); // Always zeroes
-        var unknown = reader.ReadInt32(); // TODO: Bytes to check
-        var unknown2 = reader.ReadInt16(); // TODO: Bytes to check
-        var unknown3 = reader.ReadByte(); // TODO: Bytes to check
+        var unknown = reader.ReadBytes(6); // TODO: Bytes to check
+        var unknown2 = reader.ReadByte(); // TODO: Bytes to check
 
         var notEmpty = reader.ReadBoolean();
         if (size != 0 && notEmpty is false)
@@ -69,7 +68,7 @@ public partial class ArchiveFile
 
         stream.Seek(8, SeekOrigin.Current); // Always zeroes
 
-        ArchiveEntry entry = new(this, name, type, size, offset, unknown, unknown2, unknown3);
+        ArchiveEntry entry = new(this, name, type, size, offset, unknown, unknown2);
 
         if (readEntriesContent is false)
             return entry;

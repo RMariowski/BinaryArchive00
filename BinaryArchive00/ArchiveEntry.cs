@@ -6,9 +6,8 @@ public record ArchiveEntry(
     string Type,
     int Size,
     int Offset,
-    int Unknown,
-    short Unknown2,
-    byte Unknown3
+    byte[] Unknown,
+    byte Unknown2
 )
 {
     public byte[]? Content { get; private set; }
