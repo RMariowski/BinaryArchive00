@@ -23,6 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\BinaryArchive00.Utils\BinaryArchive00.Utils.csproj" />
       <ProjectReference Include="..\BinaryArchive00\BinaryArchive00.csproj" />
     </ItemGroup>
 

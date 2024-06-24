@@ -14,7 +14,7 @@ public class ArchivesFixture : IDisposable
 
     public ArchivesFixture()
     {
-        var caPaths = Directory.GetFiles(Config.PathToArchives, "*.ca", SearchOption.AllDirectories);
+        var caPaths = Directory.GetFiles(DV2.GetInstallationPath(), "*.ca", SearchOption.AllDirectories);
         Archives = caPaths.Select(caPath => ArchiveFile.Open(caPath, readEntriesContent: false)).ToArray();
 
         Dv2Ca = Archives.Single(archive => archive.FileName == "dv2.ca");
