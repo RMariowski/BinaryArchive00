@@ -3,6 +3,10 @@
 var builder = CoconaApp.CreateBuilder();
 var app = builder.Build();
 
-app.AddCommand("extract", ExtractArchive.Command);
+app.AddSubCommand("extract", x =>
+{
+    x.AddCommand(ExtractArchive.Command);
+    x.AddCommand("all-excel", ExtractAllExcel.Command);
+});
 
 app.Run();
