@@ -1,10 +1,34 @@
 ﻿using BinaryArchive00.Utils;
 using BinaryArchive00.Utils.Image;
 
-namespace BinaryArchive00.Extractor;
+namespace BinaryArchive00.Extractor.Commands;
 
-public static class ArchiveFile_Extract
+public static class ExtractArchive
 {
+    public static void Command([Option("fp")] string filePath, [Option("op")] string outputPath)
+    {
+        if (File.Exists(filePath) is false)
+        {
+            Console.WriteLine($"The file at path {filePath} does not exist.");
+            return;
+        }
+
+        Directory.CreateDirectory(outputPath);
+
+        try
+        {
+            using var archive = ArchiveFile.Open(filePath);
+            Console.WriteLine("Binary archive loaded.");
+
+            archive.Extract(outputPath);
+            Console.WriteLine("Binary archive extracted");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+        }
+    }
+    
     public static void Extract(this ArchiveFile binaryArchive, string outputPath)
     {
         var extractedCount = 0;
