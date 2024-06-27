@@ -80,7 +80,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     private void SetImagePreview(ArchiveEntry value)
     {
-        var image = value.ToImage();
+        var image = value.ToImage(PixelFormat.Bgra8888);
         Bitmap = new Bitmap(image.AsBmpStream());
     }
 

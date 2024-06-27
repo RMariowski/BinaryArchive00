@@ -5,7 +5,7 @@ namespace BinaryArchive00.Utils;
 
 public static class ArchiveEntryExtensions
 {
-    public static ArchiveEntryImage ToImage(this ArchiveEntry entry, bool convertToRgba32 = true)
+    public static ArchiveEntryImage ToImage(this ArchiveEntry entry, PixelFormat pixelFormat)
     {
         if (entry.Type != "imag")
             throw new ArchiveEntryException("Entry is not type of image");
@@ -20,10 +20,14 @@ public static class ArchiveEntryExtensions
         var pixels = MemoryMarshal.Cast<byte, ushort>(pixelBytes);
         var uncompressedPixels = ResourceUncompressor.UncompressImage(pixels, width, height);
 
-        var data = convertToRgba32
-            ? PixelFormatConverter.ConvertRgba16ToRgba32(uncompressedPixels)
-            : MemoryMarshal.Cast<ushort, byte>(uncompressedPixels).ToArray();
+        var data = pixelFormat switch
+        {
+            PixelFormat.Argb4444 => MemoryMarshal.Cast<ushort, byte>(uncompressedPixels).ToArray(),
+            PixelFormat.Rgba8888 => PixelFormatConverter.ConvertArgb4444ToRgba8888(uncompressedPixels),
+            PixelFormat.Bgra8888 => PixelFormatConverter.ConvertArgb4444ToBgra8888(uncompressedPixels),
+            _ => throw new ArgumentOutOfRangeException(nameof(pixelFormat), pixelFormat, null)
+        };
 
-        return new ArchiveEntryImage(width, height, data);
+        return new ArchiveEntryImage(width, height, data, pixelFormat);
     }
 }

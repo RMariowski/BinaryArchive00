@@ -74,7 +74,7 @@ public static class ExtractArchive
 
     private static void ExtractImage(ArchiveEntry entry, string entryPath)
     {
-        var entryImage = entry.ToImage();
+        var entryImage = entry.ToImage(PixelFormat.Bgra8888);
         if (entryImage.Width == 0 || entryImage.Height == 0)
         {
             entryPath = entryPath.Replace("imag", "imag-corrupted");
